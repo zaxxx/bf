@@ -2,7 +2,18 @@ nette:
     application:
         mapping:
             *: BF\*Module\*Presenter
+    database:
+        default:
+            dsn: "mysql:host=127.0.0.1;dbname=bf_test"
+            user: "root"
+            password: "root"
 
 services:
     routerFactory: BF\Router\RouterFactory
     router: @routerFactory::create
+
+    # model
+    - BF\Model\Comments\CommentsRepository( comments )
+
+    # component factories
+    - BF\Components\Comments\ICommentsFactory
