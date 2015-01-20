@@ -1,0 +1,8 @@
+nette:
+    application:
+        mapping:
+            *: BF\*Module\*Presenter
+
+services:
+    routerFactory: BF\Router\RouterFactory
+    router: @routerFactory::create
