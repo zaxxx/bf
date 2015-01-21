@@ -13,10 +13,13 @@ class DeleteCommentControl extends BaseControl {
 
 	public $onSuccess = [];
 
+	/** @var int */
 	protected $commentId;
 
+	/** @var ICommentsRepository */
 	protected $commentsRepository;
 
+	/** @var IFormFactory */
 	protected $formFactory;
 
 	public function __construct(ICommentsRepository $commentsRepository, IFormFactory $formFactory) {
@@ -24,6 +27,10 @@ class DeleteCommentControl extends BaseControl {
 		$this->formFactory = $formFactory;
 	}
 
+	/**
+	 * @param int $commentId
+	 * @return $this
+	 */
 	public function setCommentId($commentId) {
 		$this->commentId = (int) $commentId;
 		return $this;

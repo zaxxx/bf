@@ -7,6 +7,9 @@ use Nette\Database;
 
 class CommentsRepository extends TreeRepository implements ICommentsRepository {
 
+	/**
+	 * @return array|Database\Table\IRow[]
+	 */
 	public function findAll() {
 		return $this->getTable()
 			->select('id, author, time_posted, content, depth')
@@ -14,6 +17,11 @@ class CommentsRepository extends TreeRepository implements ICommentsRepository {
 			->fetchAll();
 	}
 
+	/**
+	 * @param string $author
+	 * @param string $comment
+	 * @param int|NULL $parentId
+	 */
 	public function addComment($author, $comment, $parentId = NULL) {
 
 		$data = [
@@ -29,10 +37,17 @@ class CommentsRepository extends TreeRepository implements ICommentsRepository {
 		}
 	}
 
+	/**
+	 * @param int $id
+	 */
 	public function deleteComment($id) {
 		$this->removeSubtree($id);
 	}
 
+	/**
+	 * @param int $id
+	 * @param string $comment
+	 */
 	public function editComment($id, $comment) {
 		$this->getTable()
 			->wherePrimary($id)

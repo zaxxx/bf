@@ -6,6 +6,9 @@ use BF\Components\BaseControl;
 use BF\Forms\IFormFactory;
 use BF\Model\Comments\ICommentsRepository;
 use Nette\Forms\Form;
+use Nette\Database\Table\IRow;
+
+
 
 class EditCommentControl extends BaseControl {
 
@@ -13,12 +16,16 @@ class EditCommentControl extends BaseControl {
 
 	public $onSuccess = [];
 
+	/** @var int */
 	protected $commentId;
 
+	/** @var ICommentsRepository */
 	protected $commentsRepository;
 
+	/** @var IFormFactory */
 	protected $formFactory;
 
+	/** @var IRow|NULL */
 	protected $comment;
 
 	public function __construct(ICommentsRepository $commentsRepository, IFormFactory $formFactory) {
@@ -26,11 +33,18 @@ class EditCommentControl extends BaseControl {
 		$this->formFactory = $formFactory;
 	}
 
+	/**
+	 * @param int $commentId
+	 * @return $this
+	 */
 	public function setCommentId($commentId) {
 		$this->commentId = (int) $commentId;
 		return $this;
 	}
 
+	/**
+	 * @return IRow
+	 */
 	protected function getComment() {
 		if($this->comment === NULL) {
 			$this->comment = $this->commentsRepository->getById($this->commentId);
@@ -38,13 +52,9 @@ class EditCommentControl extends BaseControl {
 		return $this->comment;
 	}
 
-	public function viewDefault() {
+	public function viewDefault() {}
 
-	}
-
-	public function beforeRender() {
-
-	}
+	public function beforeRender() {}
 
 	protected function createComponentForm() {
 		$form = $this->formFactory->create();

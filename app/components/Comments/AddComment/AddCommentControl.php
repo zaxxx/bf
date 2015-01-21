@@ -13,10 +13,13 @@ class AddCommentControl extends Control {
 
 	public $onSuccess = [];
 
+	/** @var int|NULL */
 	protected $replyTo;
 
+	/** @var ICommentsRepository */
 	protected $commentsRepository;
 
+	/** @var IFormFactory */
 	protected $formFactory;
 
 	public function __construct(ICommentsRepository $commentsRepository, IFormFactory $formFactory) {
@@ -24,6 +27,10 @@ class AddCommentControl extends Control {
 		$this->formFactory = $formFactory;
 	}
 
+	/**
+	 * @param int|NULL $replyTo
+	 * @return $this
+	 */
 	public function setReplyTo($replyTo = NULL) {
 		$this->replyTo = $replyTo === NULL ? NULL : (int) $replyTo;
 		return $this;
@@ -46,7 +53,7 @@ class AddCommentControl extends Control {
 		$form->addTextArea('content', 'Comment');
 
 		$form->addSubmit('send', 'Add comment');
-		if($this->replyTo !== NULL) {
+		if($this->replyTo !== NULL) { // show Cancel button only when replying
 			$form->addSubmit('cancel', 'Cancel')
 				->setValidationScope(FALSE);
 		}
@@ -61,7 +68,7 @@ class AddCommentControl extends Control {
 	public function formSubmitted(Form $form, $values) {
 		if($form->submitted === $form['send']) {
 			$this->commentsRepository->addComment($values->author, $values->content, $this->replyTo);
-			$form->setValues([], TRUE);
+			$form->setValues([], TRUE); // reset form
 			$this->onSuccess();
 		} else if($form->submitted === $form['cancel']) {
 			$this->onCancel();

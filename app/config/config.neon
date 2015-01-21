@@ -9,7 +9,7 @@ nette:
             password: "root"
 
 extensions:
-    ajax: Zax\DI\AjaxExtension
+    ajax: Zax\DI\AjaxExtension # enable n:ajax macro in Latte
 
 services:
 

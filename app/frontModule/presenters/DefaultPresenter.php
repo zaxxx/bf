@@ -18,10 +18,16 @@ class DefaultPresenter extends Presenter {
 	}
 
 	public function actionDefault() {
+		// initialize components
 		$this['comments'];
 		$this['flashMessage'];
 	}
 
+	/** Redirect flashes to a special component
+	 *
+	 * @param string $message
+	 * @param string $type
+	 */
 	public function flashMessage($message, $type = 'info') {
 		$this['flashMessage']->flashMessage($message, $type);
 		$this['flashMessage']->redrawControl();

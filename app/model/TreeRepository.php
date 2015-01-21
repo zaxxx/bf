@@ -4,7 +4,11 @@ namespace BF\Model;
 
 class TreeRepository extends AbstractRepository {
 
-	protected function addChild($parentId, $data) {
+	/**
+	 * @param int $parentId
+	 * @param array $data
+	 */
+	protected function addChild($parentId, array $data) {
 		$this->database->beginTransaction();
 
 		$parent = $this->getById($parentId);
@@ -26,7 +30,10 @@ class TreeRepository extends AbstractRepository {
 		$this->database->commit();
 	}
 
-	protected function appendToEnd($data) {
+	/**
+	 * @param array $data
+	 */
+	protected function appendToEnd(array $data) {
 		$this->database->beginTransaction();
 
 		$struct = $this->getTable()->select('IFNULL(MAX(rgt), 0) + 1 AS lft, IFNULL(MAX(rgt), 0) + 2 AS rgt')
@@ -38,6 +45,9 @@ class TreeRepository extends AbstractRepository {
 		$this->database->commit();
 	}
 
+	/**
+	 * @param int $nodeId
+	 */
 	protected function removeSubtree($nodeId) {
 		$this->database->beginTransaction();
 

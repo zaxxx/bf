@@ -6,14 +6,9 @@ use Zax\Application\UI\Control;
 
 class FlashMessageControl extends Control {
 
+	public function viewDefault() {}
 
-	public function viewDefault() {
-
-	}
-
-	public function beforeRender() {
-
-	}
+	public function beforeRender() {}
 
 }
 

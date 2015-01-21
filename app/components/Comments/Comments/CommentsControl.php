@@ -10,12 +10,16 @@ class CommentsControl extends Control {
 	/** @persistent */
 	public $id;
 
+	/** @var ICommentsRepository */
 	protected $commentsRepository;
 
+	/** @var IAddCommentFactory */
 	protected $addCommentFactory;
 
+	/** @var IEditCommentFactory */
 	protected $editCommentFactory;
 
+	/** @var IDeleteCommentFactory */
 	protected $deleteCommentFactory;
 
 	public function __construct(ICommentsRepository $commentsRepository,
