@@ -1,0 +1,9 @@
+{layout './@layout.latte'}
+
+{define comment}
+	{if (int)$control->id === $comment->id}
+		{control editComment}
+	{else}
+		<p>{$comment->content}</p>
+	{/if}
+{/define}

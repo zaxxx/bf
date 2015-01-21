@@ -1,0 +1,7 @@
+.opacity-hover {
+    opacity: 0;
+}
+
+.comment:hover .opacity-hover {
+    opacity: 1;
+}

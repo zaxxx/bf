@@ -38,4 +38,26 @@ class TreeRepository extends AbstractRepository {
 		$this->database->commit();
 	}
 
+	protected function removeSubtree($nodeId) {
+		$this->database->beginTransaction();
+
+		$node = $this->getById($nodeId);
+
+		$this->getTable()
+			->where('lft >= ? AND rgt <= ?', $node['lft'], $node['rgt'])
+			->delete();
+
+		$diff = $node['rgt'] - $node['lft'] + 1;
+
+		$this->getTable()
+			->where('lft > ?', $node['rgt'])
+			->update(['lft' => $this->database->literal('lft - ' . $diff)]);
+
+		$this->getTable()
+			->where('rgt > ?', $node['rgt'])
+			->update(['rgt' => $this->database->literal('rgt - ' . $diff)]);
+
+		$this->database->commit();
+	}
+
 }

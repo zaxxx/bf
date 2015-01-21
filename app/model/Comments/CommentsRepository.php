@@ -9,7 +9,7 @@ class CommentsRepository extends TreeRepository implements ICommentsRepository {
 
 	public function findAll() {
 		return $this->getTable()
-			->select('author, time_posted, content, depth')
+			->select('id, author, time_posted, content, depth')
 			->order('lft')
 			->fetchAll();
 	}
@@ -27,6 +27,16 @@ class CommentsRepository extends TreeRepository implements ICommentsRepository {
 		} else {
 			$this->addChild($parentId, $data);
 		}
+	}
+
+	public function deleteComment($id) {
+		$this->removeSubtree($id);
+	}
+
+	public function editComment($id, $comment) {
+		$this->getTable()
+			->wherePrimary($id)
+			->update(['content' => $comment]);
 	}
 
 }

@@ -10,4 +10,8 @@ interface ICommentsRepository {
 
 	public function addComment($author, $comment, $parentId = NULL);
 
+	public function deleteComment($id);
+
+	public function editComment($id, $comment);
+
 }

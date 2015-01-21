@@ -9,11 +9,19 @@ nette:
             password: "root"
 
 services:
+
+    # router
     routerFactory: BF\Router\RouterFactory
     router: @routerFactory::create
+
+    # form factory
+    - BF\IFormFactory
 
     # model
     - BF\Model\Comments\CommentsRepository( comments )
 
     # component factories
     - BF\Components\Comments\ICommentsFactory
+    - BF\Components\Comments\IAddCommentFactory
+    - BF\Components\Comments\IEditCommentFactory
+    - BF\Components\Comments\IDeleteCommentFactory

@@ -1,0 +1,51 @@
+
+
+
+{define comment}
+	<p>{$comment->content}</p>
+{/define}
+
+{define aboveComments}
+	<a n:href="this, view => Reply, id => NULL" class="btn btn-success"><span class="glyphicon glyphicon-comment"></span> Add comment</a>
+{/define}
+
+{snippet}
+{var $margin = 20}
+
+<div class="row">
+	{control addComment}
+</div>
+
+{foreach $comments as $comment}
+	<div class="well comment" style="margin-left: {$comment->depth * $margin}px">
+		<p>
+			<span class="text-muted">#{$comment->id}</span> <strong>{$comment->author}</strong>
+			<span class="pull-right">{$comment->time_posted}</span>
+		</p>
+
+		{include comment}
+
+		<p class="text-right">
+			<a n:href="this, view => Delete, id => $comment->id" class="btn btn-sm btn-danger opacity-hover">
+				<span class="glyphicon glyphicon-trash"></span> Delete
+			</a>
+			<a n:href="this, view => Edit, id => $comment->id" class="btn btn-sm btn-primary opacity-hover">
+				<span class="glyphicon glyphicon-pencil"></span> Edit
+			</a>
+			<a n:href="this, view => Reply, id => $comment->id" class="btn btn-sm btn-success opacity-hover">
+				<span class="glyphicon glyphicon-comment"></span> Reply
+			</a>
+		</p>
+
+		<div n:ifset="#selected" n:if="$comment->id === (int) $control->id" class="row" style="margin-left: {($comment->depth + 1) * $margin}px">
+			{include selected}
+		</div>
+
+	</div>
+
+
+
+
+
+{/foreach}
+{/snippet}
