@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteBase /
+
+# AddType application/x-httpd-php .phpt # needed for tests
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !\.(js|ico|gif|jpg|jpeg|png|pdf|css|html|swf|flv|xml|svg|woff|ttf|txt|php|map)$ index.php [QSA,L]
