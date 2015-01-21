@@ -3,7 +3,7 @@
 namespace BF\Components\Comments;
 
 use BF\Components\BaseControl;
-use BF\IFormFactory;
+use BF\Forms\IFormFactory;
 use BF\Model\Comments\ICommentsRepository;
 use Nette\Forms\Form;
 

@@ -1,7 +1,16 @@
+body {
+    padding-bottom: 40px;
+}
+
 .opacity-hover {
     opacity: 0;
 }
 
 .comment:hover .opacity-hover {
     opacity: 1;
+}
+
+.alerts {
+    position: fixed;
+    bottom: 10px;
 }

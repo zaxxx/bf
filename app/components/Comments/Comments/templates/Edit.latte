@@ -4,6 +4,6 @@
 	{if (int)$control->id === $comment->id}
 		{control editComment}
 	{else}
-		<p>{$comment->content}</p>
+		{include commentText, comment => $comment}
 	{/if}
 {/define}

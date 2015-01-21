@@ -3,7 +3,7 @@
 namespace BF\Components\Comments;
 
 use BF\Components\BaseControl;
-use BF\IFormFactory;
+use BF\Forms\IFormFactory;
 use BF\Model\Comments\ICommentsRepository;
 use Nette\Forms\Form;
 
@@ -49,10 +49,10 @@ class EditCommentControl extends BaseControl {
 	protected function createComponentForm() {
 		$form = $this->formFactory->create();
 
-		$form->addTextArea('content', 'Komentář');
+		$form->addTextArea('content', 'Comment');
 
-		$form->addSubmit('send', 'Upravit komentář');
-		$form->addSubmit('cancel', 'Zrušit')
+		$form->addSubmit('send', 'Edit comment');
+		$form->addSubmit('cancel', 'Cancel')
 			->setValidationScope(FALSE);
 
 		$form->setDefaults($this->getComment());

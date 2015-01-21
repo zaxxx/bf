@@ -1,0 +1,7 @@
+<div class="alerts row text-center" n:snippet>
+	<div n:if="count($flashes)>0" class="container">
+		<div n:foreach="$flashes as $flash" class='alert alert-{$flash->type} fade in'>
+			{$flash->message}
+		</div>
+	</div>
+</div>

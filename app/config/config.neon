@@ -8,6 +8,9 @@ nette:
             user: "root"
             password: "root"
 
+extensions:
+    ajax: Zax\DI\AjaxExtension
+
 services:
 
     # router
@@ -15,12 +18,14 @@ services:
     router: @routerFactory::create
 
     # form factory
-    - BF\IFormFactory
+    - BF\Forms\IFormFactory
 
     # model
     - BF\Model\Comments\CommentsRepository( comments )
 
     # component factories
+    - BF\Components\IFlashMessageFactory
+
     - BF\Components\Comments\ICommentsFactory
     - BF\Components\Comments\IAddCommentFactory
     - BF\Components\Comments\IEditCommentFactory

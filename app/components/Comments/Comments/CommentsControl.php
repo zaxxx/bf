@@ -45,13 +45,26 @@ class CommentsControl extends Control {
 	}
 
 	protected function createComponentAddComment() {
-	    $control = $this->addCommentFactory->create()
-		    ->setReplyTo($this->id);
+	    $control = $this->addCommentFactory->create();
 
 		$control->onCancel[] = function() {$this->goDefault();};
 
 		$control->onSuccess[] = function() {
-			$this->flashMessage('Komentář byl přidán', 'success');
+			$this->presenter->flashMessage('Comment added.', 'success');
+			$this->goDefault();
+		};
+
+		return $control;
+	}
+
+	protected function createComponentReply() {
+		$control = $this->addCommentFactory->create()
+			->setReplyTo($this->id);
+
+		$control->onCancel[] = function() {$this->goDefault();};
+
+		$control->onSuccess[] = function() {
+			$this->presenter->flashMessage('Reply added.', 'success');
 			$this->goDefault();
 		};
 
@@ -65,7 +78,7 @@ class CommentsControl extends Control {
 		$control->onCancel[] = function() {$this->goDefault();};
 
 		$control->onSuccess[] = function() {
-			$this->flashMessage('Komentář byl upraven.', 'success');
+			$this->presenter->flashMessage('Comment edited.', 'success');
 			$this->goDefault();
 		};
 
@@ -79,7 +92,7 @@ class CommentsControl extends Control {
 		$control->onCancel[] = function() {$this->goDefault();};
 
 		$control->onSuccess[] = function() {
-			$this->flashMessage('Komentář byl odstraněn', 'success');
+			$this->presenter->flashMessage('Comment deleted.', 'success');
 			$this->goDefault();
 		};
 

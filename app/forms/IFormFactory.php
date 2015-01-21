@@ -1,8 +1,6 @@
 <?php
 
-namespace BF;
-
-use Nette\Application\UI\Form;
+namespace BF\Forms;
 
 interface IFormFactory {
 
